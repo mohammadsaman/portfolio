@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<!--
+====================================================
+Portfolio Website
+Developer: Mohamad Saman
+Role: Web Developer & Tech Expert
+
+Project Description:
+Personal portfolio website showcasing skills,
+experience, and contact information.
+
+Note:
+The code structure and organization were refined
+with assistance from Artificial Intelligence tools.
+Final customization and implementation by the developer.
+====================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mohamad Saman — Developer & Tech Expert</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <meta name="description" content="Mohamad Saman - Web developer, programmer, and tech expert portfolio.">
+<meta name="keywords" content="Mohamad Saman, web developer, portfolio, programming, Kurdistan developer">
+<meta name="author" content="Mohamad Saman">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #18181f;
+      --accent: #00e5a0;
+      --accent2: #7c6eff;
+      --text: #e8e8f0;
+      --muted: #6b6b80;
+      --border: rgba(255,255,255,0.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-weight: 300;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      position: fixed; width: 10px; height: 10px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1px solid rgba(0,229,160,0.4); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.18s ease;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: 0.5;
+    }
+
+    /* GRID BACKGROUND */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 60px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(20px);
+    }
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px; font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 40px; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+      transition: color 0.3s ease; position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 140px 60px 80px;
+      position: relative; z-index: 1;
+    }
+    .hero-inner { max-width: 1000px; }
+
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(0,229,160,0.07);
+      border: 1px solid rgba(0,229,160,0.2);
+      border-radius: 100px; padding: 8px 18px;
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 40px;
+      animation: fadeUp 0.8s ease both;
+    }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(56px, 8vw, 110px);
+      font-weight: 800; line-height: 0.9;
+      letter-spacing: -4px;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero h1 .name-accent { color: var(--accent); }
+    .hero h1 .name-dim { color: var(--muted); }
+
+    .hero-sub {
+      margin-top: 32px; font-size: 15px;
+      color: var(--muted); max-width: 480px;
+      line-height: 1.8; letter-spacing: 0.3px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-cta {
+      display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--accent); color: #0a0a0f;
+      padding: 14px 28px; border-radius: 4px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; cursor: none;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #fff; transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0,229,160,0.2);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 10px;
+      border: 1px solid var(--border); color: var(--text);
+      padding: 14px 28px; border-radius: 4px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none; cursor: none;
+      transition: all 0.3s ease;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent); color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 60px;
+      display: flex; align-items: center; gap: 16px;
+      color: var(--muted); font-size: 11px; letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: fadeUp 1s 0.5s ease both;
+    }
+    .scroll-line {
+      width: 60px; height: 1px; background: var(--muted);
+      position: relative; overflow: hidden;
+    }
+    .scroll-line::after {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%; background: var(--accent);
+      animation: scrollLine 2s 1s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0% { left: -100%; } 100% { left: 100%; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 100px 60px;
+      position: relative; z-index: 1;
+    }
+    .section-label {
+      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .section-label::before {
+      content: ''; width: 40px; height: 1px; background: var(--accent);
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800; letter-spacing: -2px;
+      margin-bottom: 60px; line-height: 1.1;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center; max-width: 1100px;
+    }
+    .about-text p {
+      font-size: 15px; line-height: 1.9;
+      color: rgba(232,232,240,0.75);
+      margin-bottom: 20px;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 48px;
+      position: relative; overflow: hidden;
+    }
+    .about-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+    .about-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 28px; font-weight: 800; color: white;
+      margin-bottom: 24px;
+    }
+    .about-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px; font-weight: 700; margin-bottom: 6px;
+    }
+    .about-card .role {
+      color: var(--accent); font-size: 12px;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-top: 28px;
+    }
+    .stat {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 16px;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px; font-weight: 800;
+      color: var(--accent); line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px; max-width: 1100px;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 32px;
+      transition: all 0.3s ease; cursor: none;
+      position: relative; overflow: hidden;
+    }
+    .skill-card::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .skill-card:hover { border-color: rgba(0,229,160,0.2); transform: translateY(-4px); }
+    .skill-card:hover::after { transform: scaleX(1); }
+
+    .skill-icon {
+      font-size: 32px; margin-bottom: 20px;
+      display: block;
+    }
+    .skill-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px; font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .skill-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
+    }
+    .tag {
+      font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 100px;
+      background: rgba(0,229,160,0.07);
+      border: 1px solid rgba(0,229,160,0.15);
+      color: var(--accent);
+    }
+
+    /* EXPERIENCE */
+    .exp-list { max-width: 800px; }
+    .exp-item {
+      display: grid; grid-template-columns: 120px 1fr;
+      gap: 40px; margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:last-child { border-bottom: none; margin-bottom: 0; }
+    .exp-year {
+      font-size: 12px; color: var(--muted);
+      letter-spacing: 2px; padding-top: 4px;
+    }
+    .exp-content h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px; font-weight: 700; margin-bottom: 4px;
+    }
+    .exp-role {
+      color: var(--accent); font-size: 12px;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .exp-content p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+
+    /* CONTACT */
+    .contact-wrapper {
+      max-width: 700px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 64px;
+      position: relative; overflow: hidden;
+    }
+    .contact-wrapper::before {
+      content: ''; position: absolute;
+      top: -80px; right: -80px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(0,229,160,0.06), transparent 70%);
+      border-radius: 50%;
+    }
+    .contact-wrapper p {
+      font-size: 15px; color: var(--muted);
+      line-height: 1.8; margin-bottom: 40px;
+    }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-family: 'Syne', sans-serif;
+      font-size: 20px; font-weight: 700;
+      color: var(--text); text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px; cursor: none;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .contact-email:hover { color: var(--accent); border-color: var(--accent); }
+    .email-icon {
+      width: 42px; height: 42px; border-radius: 8px;
+      background: rgba(0,229,160,0.1);
+      border: 1px solid rgba(0,229,160,0.2);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 60px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; z-index: 1;
+    }
+    .footer-left {
+      font-size: 12px; color: var(--muted); letter-spacing: 1px;
+    }
+    .footer-left span { color: var(--accent); }
+    .footer-right {
+      font-size: 11px; color: var(--muted);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* GLOW BLOB */
+    .glow-blob {
+      position: fixed; border-radius: 50%;
+      filter: blur(100px); pointer-events: none;
+      z-index: 0; opacity: 0.12;
+      animation: blobFloat 8s ease-in-out infinite;
+    }
+    .blob1 {
+      width: 500px; height: 500px;
+      background: var(--accent); top: -100px; right: -100px;
+    }
+    .blob2 {
+      width: 400px; height: 400px;
+      background: var(--accent2); bottom: 0; left: -100px;
+      animation-delay: -4s;
+    }
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(20px, 30px) scale(1.05); }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .hero, section { padding-left: 24px; padding-right: 24px; }
+      .hero { padding-top: 120px; }
+      .hero-scroll { left: 24px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      .contact-wrapper { padding: 36px 28px; }
+      footer { flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div class="glow-blob blob1"></div>
+  <div class="glow-blob blob2"></div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">MS_</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="status-badge">
+        <div class="status-dot"></div>
+        Available for projects
+      </div>
+      <h1>
+        <span class="name-dim">MOHAMAD</span><br>
+        <span class="name-accent">SAMAN</span>
+      </h1>
+      <p class="hero-sub">
+        Web Developer · Mobile Repair Technician · Tech Enthusiast.<br>
+        Building creative digital solutions and solving complex tech problems.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">
+          <span>Get In Touch</span>
+          <span>→</span>
+        </a>
+        <a href="#skills" class="btn-ghost">
+          <span>View Skills</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Scroll down
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About Me</div>
+    <div class="section-title">Who I Am</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I am Mohamad Saman, an expert in programming, web development, and mobile phone repair.
+          I have a strong background in computer usage and digital technologies.
+        </p>
+        <p>
+          I love building creative web solutions — from clean, functional websites to
+          interactive digital experiences — and I genuinely enjoy helping people solve their tech problems.
+        </p>
+        <p>
+          Whether it's writing elegant code or fixing a broken device,
+          I bring the same energy: focused, curious, and committed to doing it right.
+        </p>
+      </div>
+      <div class="about-card">
+        <div class="about-avatar">MS</div>
+        <h3>Mohamad Saman</h3>
+        <div class="role">Developer & Tech Expert</div>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">3+</div>
+            <div class="stat-label">Years Coding</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">100+</div>
+            <div class="stat-label">Devices Fixed</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Curiosity</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">24/7</div>
+            <div class="stat-label">Problem Solver</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Expertise</div>
+    <div class="section-title">What I Do</div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <span class="skill-icon">🌐</span>
+        <h3>Web Development</h3>
+        <p>Crafting modern, responsive websites from scratch using web standards and best practices.</p>
+        <div class="skill-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">📱</span>
+        <h3>Mobile Repair</h3>
+        <p>Expert diagnosis and repair of smartphones — screen replacements, battery swaps, hardware fixes, and more.</p>
+        <div class="skill-tags">
+          <span class="tag">Hardware</span>
+          <span class="tag">Diagnostics</span>
+          <span class="tag">Repair</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">💻</span>
+        <h3>Computer Skills</h3>
+        <p>Broad technical fluency across operating systems, software tools, and digital workflows.</p>
+        <div class="skill-tags">
+          <span class="tag">Windows</span>
+          <span class="tag">Networking</span>
+          <span class="tag">Troubleshoot</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">🎨</span>
+        <h3>UI Design</h3>
+        <p>Turning ideas into polished, user-friendly interfaces that look great and work even better.</p>
+        <div class="skill-tags">
+          <span class="tag">Layout</span>
+          <span class="tag">Responsive</span>
+          <span class="tag">UX</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Resume</div>
+    <div class="section-title">Experience</div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-year">Present</div>
+        <div class="exp-content">
+          <h3>Web Developer</h3>
+          <div class="exp-role">Frontend Development</div>
+          <p>
+            Designing and building websites using HTML, CSS, and JavaScript.
+            Focused on clean code, responsive design, and great user experiences.
+          </p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-year">Present</div>
+        <div class="exp-content">
+          <h3>Mobile Phone Repair Technician</h3>
+          <div class="exp-role">Hardware & Diagnostics</div>
+          <p>
+            Repairing and servicing smartphones with precision — handling everything
+            from screen replacements to complex board-level troubleshooting.
+          </p>
+        </div>
+      </div>
+      <div class="exp-item">
+        <div class="exp-year">Ongoing</div>
+        <div class="exp-content">
+          <h3>Computer & Digital Tech</h3>
+          <div class="exp-role">Tech Support & Solutions</div>
+          <p>
+            Assisting individuals and businesses with computer issues, digital tools,
+            and technology needs — from software troubleshooting to full setups.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <div class="section-title">Let's Talk</div>
+    <div class="contact-wrapper">
+      <p>
+        Have a project in mind, need a website built, or got a device that needs fixing?
+        Reach out — I'd love to hear from you and see how I can help.
+      </p>
+      <a href="mailto:mohammadsaman728@gmail.com" class="contact-email">
+        <span class="email-icon">✉</span>
+        mohammadsaman728@gmail.com
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      © 2025 <span>Mohamad Saman</span> — All rights reserved.
+    </div>
+    <div class="footer-right">Made with precision</div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    function animateRing() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    document.querySelectorAll('a, button, .skill-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+        ring.style.borderColor = 'rgba(0,229,160,0.7)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.borderColor = 'rgba(0,229,160,0.4)';
+      });
+    });
+
+    // Intersection Observer for section animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.skill-card, .exp-item, .about-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
