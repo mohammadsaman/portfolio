@@ -1,18 +1,10 @@
 <!DOCTYPE html>
 <!--
 ====================================================
-Portfolio Website
+Portfolio Website — Ultimate Brand Edition
 Developer: Mohamad Saman
 Role: Web Developer & Tech Expert
-
-Project Description:
-Personal portfolio website showcasing skills,
-experience, and contact information.
-
-Note:
-The code structure and organization were refined
-with assistance from Artificial Intelligence tools.
-Final customization and implementation by the developer.
+Brand: Diamond Logo System — Dark Purple + White
 ====================================================
 -->
 <html lang="en">
@@ -22,21 +14,23 @@ Final customization and implementation by the developer.
   <title>Mohamad Saman — Developer & Tech Expert</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
   <meta name="description" content="Mohamad Saman - Web developer, programmer, and tech expert portfolio.">
-<meta name="keywords" content="Mohamad Saman, web developer, portfolio, programming, Kurdistan developer">
-<meta name="author" content="Mohamad Saman">
+  <meta name="keywords" content="Mohamad Saman, web developer, portfolio, programming, Kurdistan developer">
+  <meta name="author" content="Mohamad Saman">
   <meta name="google-site-verification" content="ix8_MWRxjny9Jd4g4y5almNmtyxVeUJJZou52fe3ZMA" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0a0a0f;
-      --surface: #111118;
-      --surface2: #18181f;
-      --accent: #00e5a0;
-      --accent2: #7c6eff;
-      --text: #e8e8f0;
-      --muted: #6b6b80;
-      --border: rgba(255,255,255,0.06);
+      --bg: #08000F;
+      --surface: #100018;
+      --surface2: #170020;
+      --accent: #C084FC;
+      --accent2: #9B4FD4;
+      --accent3: #7B2FBE;
+      --text: #F0E8FF;
+      --muted: #7A6B8A;
+      --border: rgba(192,132,252,0.08);
+      --border2: rgba(192,132,252,0.18);
     }
 
     html { scroll-behavior: smooth; }
@@ -60,7 +54,7 @@ Final customization and implementation by the developer.
     }
     .cursor-ring {
       position: fixed; width: 36px; height: 36px;
-      border: 1px solid rgba(0,229,160,0.4); border-radius: 50%;
+      border: 1px solid rgba(192,132,252,0.4); border-radius: 50%;
       pointer-events: none; z-index: 9998;
       transform: translate(-50%, -50%);
       transition: all 0.18s ease;
@@ -79,31 +73,49 @@ Final customization and implementation by the developer.
       content: '';
       position: fixed; inset: 0;
       background-image:
-        linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+        linear-gradient(rgba(155,79,212,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(155,79,212,0.04) 1px, transparent 1px);
       background-size: 60px 60px;
       pointer-events: none; z-index: 0;
     }
 
-    /* NAV */
+    /* GLOW BLOBS */
+    .glow-blob {
+      position: fixed; border-radius: 50%;
+      filter: blur(100px); pointer-events: none;
+      z-index: 0; opacity: 0.1;
+      animation: blobFloat 8s ease-in-out infinite;
+    }
+    .blob1 { width: 500px; height: 500px; background: #9B4FD4; top: -100px; right: -100px; }
+    .blob2 { width: 400px; height: 400px; background: #5B1F8E; bottom: 0; left: -100px; animation-delay: -4s; }
+    @keyframes blobFloat {
+      0%, 100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(20px,30px) scale(1.05); }
+    }
+
+    /* ── BRAND LOGO SVG ── */
+    .brand-logo-svg { display: inline-block; vertical-align: middle; }
+
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 24px 60px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(10,10,15,0.85);
+      padding: 20px 60px;
+      border-bottom: 1px solid var(--border2);
+      background: rgba(8,0,15,0.9);
       backdrop-filter: blur(20px);
     }
     .nav-logo {
+      display: flex; align-items: center; gap: 10px;
       font-family: 'Syne', sans-serif;
-      font-size: 18px; font-weight: 800;
-      color: var(--accent);
-      letter-spacing: -0.5px;
+      font-size: 15px; font-weight: 800;
+      color: #FFFFFF; letter-spacing: 0.08em;
     }
+    .nav-logo svg { width: 32px; height: 32px; }
     .nav-links { display: flex; gap: 40px; }
     .nav-links a {
       color: var(--muted); text-decoration: none;
-      font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
       transition: color 0.3s ease; position: relative;
     }
     .nav-links a::after {
@@ -113,8 +125,18 @@ Final customization and implementation by the developer.
     }
     .nav-links a:hover { color: var(--accent); }
     .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: rgba(155,79,212,0.15);
+      border: 0.5px solid rgba(155,79,212,0.5);
+      color: var(--accent); font-size: 11px;
+      padding: 7px 18px; border-radius: 20px;
+      text-decoration: none; letter-spacing: 0.08em;
+      cursor: none;
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { background: rgba(155,79,212,0.3); }
 
-    /* HERO */
+    /* ── HERO ── */
     .hero {
       min-height: 100vh; display: flex; align-items: center;
       padding: 140px 60px 80px;
@@ -124,8 +146,8 @@ Final customization and implementation by the developer.
 
     .status-badge {
       display: inline-flex; align-items: center; gap: 10px;
-      background: rgba(0,229,160,0.07);
-      border: 1px solid rgba(0,229,160,0.2);
+      background: rgba(155,79,212,0.08);
+      border: 1px solid rgba(155,79,212,0.25);
       border-radius: 100px; padding: 8px 18px;
       font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
       color: var(--accent); margin-bottom: 40px;
@@ -148,8 +170,8 @@ Final customization and implementation by the developer.
       letter-spacing: -4px;
       animation: fadeUp 0.8s 0.1s ease both;
     }
-    .hero h1 .name-accent { color: var(--accent); }
     .hero h1 .name-dim { color: var(--muted); }
+    .hero h1 .name-accent { color: #FFFFFF; }
 
     .hero-sub {
       margin-top: 32px; font-size: 15px;
@@ -164,7 +186,7 @@ Final customization and implementation by the developer.
     }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 10px;
-      background: var(--accent); color: #0a0a0f;
+      background: var(--accent2); color: #FFFFFF;
       padding: 14px 28px; border-radius: 4px;
       font-family: 'DM Mono', monospace;
       font-size: 12px; font-weight: 500;
@@ -173,12 +195,13 @@ Final customization and implementation by the developer.
       transition: all 0.3s ease;
     }
     .btn-primary:hover {
-      background: #fff; transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(0,229,160,0.2);
+      background: var(--accent); color: #08000F;
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(155,79,212,0.3);
     }
     .btn-ghost {
       display: inline-flex; align-items: center; gap: 10px;
-      border: 1px solid var(--border); color: var(--text);
+      border: 1px solid var(--border2); color: var(--text);
       padding: 14px 28px; border-radius: 4px;
       font-family: 'DM Mono', monospace;
       font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
@@ -189,6 +212,14 @@ Final customization and implementation by the developer.
       border-color: var(--accent); color: var(--accent);
       transform: translateY(-2px);
     }
+
+    /* Hero brand mark — large logo */
+    .hero-brand-mark {
+      position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+      z-index: 0; opacity: 0.12;
+      animation: fadeUp 1.2s 0.4s ease both;
+    }
+    .hero-brand-mark svg { width: 320px; height: 320px; }
 
     .hero-scroll {
       position: absolute; bottom: 40px; left: 60px;
@@ -206,16 +237,13 @@ Final customization and implementation by the developer.
       width: 100%; height: 100%; background: var(--accent);
       animation: scrollLine 2s 1s ease-in-out infinite;
     }
-    @keyframes scrollLine {
-      0% { left: -100%; } 100% { left: 100%; }
-    }
-
+    @keyframes scrollLine { 0% { left: -100%; } 100% { left: 100%; } }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* SECTIONS */
+    /* ── SECTIONS ── */
     section {
       padding: 100px 60px;
       position: relative; z-index: 1;
@@ -235,21 +263,19 @@ Final customization and implementation by the developer.
       margin-bottom: 60px; line-height: 1.1;
     }
 
-    /* ABOUT */
+    /* ── ABOUT ── */
     .about-grid {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 60px; align-items: center; max-width: 1100px;
     }
     .about-text p {
       font-size: 15px; line-height: 1.9;
-      color: rgba(232,232,240,0.75);
+      color: rgba(240,232,255,0.7);
       margin-bottom: 20px;
     }
-    .about-text p:last-child { margin-bottom: 0; }
-
     .about-card {
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border2);
       border-radius: 12px; padding: 48px;
       position: relative; overflow: hidden;
     }
@@ -259,12 +285,8 @@ Final customization and implementation by the developer.
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
     .about-avatar {
-      width: 80px; height: 80px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-size: 28px; font-weight: 800; color: white;
-      margin-bottom: 24px;
+      width: 72px; height: 72px;
+      margin-bottom: 20px;
     }
     .about-card h3 {
       font-family: 'Syne', sans-serif;
@@ -287,12 +309,11 @@ Final customization and implementation by the developer.
     .stat-num {
       font-family: 'Syne', sans-serif;
       font-size: 28px; font-weight: 800;
-      color: var(--accent); line-height: 1;
-      margin-bottom: 4px;
+      color: var(--accent); line-height: 1; margin-bottom: 4px;
     }
     .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
 
-    /* SKILLS */
+    /* ── SKILLS ── */
     .skills-grid {
       display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px; max-width: 1100px;
@@ -307,36 +328,28 @@ Final customization and implementation by the developer.
     .skill-card::after {
       content: ''; position: absolute;
       bottom: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      background: linear-gradient(90deg, var(--accent3), var(--accent));
       transform: scaleX(0); transform-origin: left;
       transition: transform 0.4s ease;
     }
-    .skill-card:hover { border-color: rgba(0,229,160,0.2); transform: translateY(-4px); }
+    .skill-card:hover { border-color: rgba(192,132,252,0.25); transform: translateY(-4px); }
     .skill-card:hover::after { transform: scaleX(1); }
-
-    .skill-icon {
-      font-size: 32px; margin-bottom: 20px;
-      display: block;
-    }
+    .skill-icon { font-size: 32px; margin-bottom: 20px; display: block; }
     .skill-card h3 {
       font-family: 'Syne', sans-serif;
-      font-size: 18px; font-weight: 700;
-      margin-bottom: 10px;
+      font-size: 18px; font-weight: 700; margin-bottom: 10px;
     }
     .skill-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
-
-    .skill-tags {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
-    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
     .tag {
       font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
       padding: 5px 12px; border-radius: 100px;
-      background: rgba(0,229,160,0.07);
-      border: 1px solid rgba(0,229,160,0.15);
+      background: rgba(155,79,212,0.08);
+      border: 1px solid rgba(155,79,212,0.2);
       color: var(--accent);
     }
 
-    /* EXPERIENCE */
+    /* ── EXPERIENCE ── */
     .exp-list { max-width: 800px; }
     .exp-item {
       display: grid; grid-template-columns: 120px 1fr;
@@ -345,26 +358,22 @@ Final customization and implementation by the developer.
       border-bottom: 1px solid var(--border);
     }
     .exp-item:last-child { border-bottom: none; margin-bottom: 0; }
-    .exp-year {
-      font-size: 12px; color: var(--muted);
-      letter-spacing: 2px; padding-top: 4px;
-    }
+    .exp-year { font-size: 12px; color: var(--muted); letter-spacing: 2px; padding-top: 4px; }
     .exp-content h3 {
       font-family: 'Syne', sans-serif;
       font-size: 20px; font-weight: 700; margin-bottom: 4px;
     }
     .exp-role {
       color: var(--accent); font-size: 12px;
-      letter-spacing: 2px; text-transform: uppercase;
-      margin-bottom: 16px;
+      letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px;
     }
     .exp-content p { font-size: 14px; color: var(--muted); line-height: 1.8; }
 
-    /* CONTACT */
+    /* ── CONTACT ── */
     .contact-wrapper {
       max-width: 700px;
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border2);
       border-radius: 16px; padding: 64px;
       position: relative; overflow: hidden;
     }
@@ -372,7 +381,7 @@ Final customization and implementation by the developer.
       content: ''; position: absolute;
       top: -80px; right: -80px;
       width: 260px; height: 260px;
-      background: radial-gradient(circle, rgba(0,229,160,0.06), transparent 70%);
+      background: radial-gradient(circle, rgba(155,79,212,0.08), transparent 70%);
       border-radius: 50%;
     }
     .contact-wrapper p {
@@ -382,73 +391,81 @@ Final customization and implementation by the developer.
     .contact-email {
       display: inline-flex; align-items: center; gap: 14px;
       font-family: 'Syne', sans-serif;
-      font-size: 20px; font-weight: 700;
+      font-size: 18px; font-weight: 700;
       color: var(--text); text-decoration: none;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 12px; cursor: none;
+      padding-bottom: 12px; margin-bottom: 20px;
+      cursor: none;
       transition: color 0.3s ease, border-color 0.3s ease;
+      display: flex;
     }
     .contact-email:hover { color: var(--accent); border-color: var(--accent); }
     .email-icon {
       width: 42px; height: 42px; border-radius: 8px;
-      background: rgba(0,229,160,0.1);
-      border: 1px solid rgba(0,229,160,0.2);
+      background: rgba(155,79,212,0.1);
+      border: 1px solid rgba(155,79,212,0.25);
       display: inline-flex; align-items: center; justify-content: center;
       font-size: 18px; flex-shrink: 0;
     }
 
-    /* FOOTER */
+    /* ── BRAND SHOWCASE SECTION ── */
+    .brand-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2);
+    }
+    .brand-row {
+      display: flex; align-items: center;
+      gap: 24px; flex-wrap: wrap;
+      max-width: 1100px;
+    }
+    .brand-chip {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 20px;
+      background: rgba(155,79,212,0.06);
+      border: 0.5px solid var(--border2);
+      border-radius: 8px;
+    }
+    .brand-chip svg { width: 28px; height: 28px; }
+    .brand-chip-label { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+    .brand-chip-name { font-size: 13px; font-weight: 500; color: var(--text); }
+    .brand-divider { width: 1px; height: 40px; background: var(--border2); }
+
+    /* ── FOOTER ── */
     footer {
       padding: 40px 60px;
       border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       position: relative; z-index: 1;
     }
-    .footer-left {
-      font-size: 12px; color: var(--muted); letter-spacing: 1px;
-    }
+    .footer-logo { display: flex; align-items: center; gap: 10px; }
+    .footer-logo svg { width: 24px; height: 24px; }
+    .footer-left { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
     .footer-left span { color: var(--accent); }
-    .footer-right {
-      font-size: 11px; color: var(--muted);
-      letter-spacing: 2px; text-transform: uppercase;
-    }
+    .footer-right { font-size: 11px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
 
-    /* DIVIDER */
     .divider {
       width: 100%; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      background: linear-gradient(90deg, transparent, var(--border2), transparent);
     }
 
-    /* GLOW BLOB */
-    .glow-blob {
-      position: fixed; border-radius: 50%;
-      filter: blur(100px); pointer-events: none;
-      z-index: 0; opacity: 0.12;
-      animation: blobFloat 8s ease-in-out infinite;
-    }
-    .blob1 {
-      width: 500px; height: 500px;
-      background: var(--accent); top: -100px; right: -100px;
-    }
-    .blob2 {
-      width: 400px; height: 400px;
-      background: var(--accent2); bottom: 0; left: -100px;
-      animation-delay: -4s;
-    }
-    @keyframes blobFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(20px, 30px) scale(1.05); }
+    /* ── GLOW ACCENT LINE ── */
+    .accent-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, var(--accent3), var(--accent));
+      margin-bottom: 16px;
     }
 
     @media (max-width: 768px) {
-      nav { padding: 20px 24px; }
+      nav { padding: 16px 20px; }
       .nav-links { display: none; }
-      .hero, section { padding-left: 24px; padding-right: 24px; }
-      .hero { padding-top: 120px; }
-      .hero-scroll { left: 24px; }
+      .hero, section { padding-left: 20px; padding-right: 20px; }
+      .hero { padding-top: 110px; }
+      .hero-scroll { left: 20px; }
+      .hero-brand-mark { display: none; }
       .about-grid { grid-template-columns: 1fr; }
       .exp-item { grid-template-columns: 1fr; gap: 8px; }
-      .contact-wrapper { padding: 36px 28px; }
+      .contact-wrapper { padding: 28px 20px; }
       footer { flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
@@ -457,22 +474,59 @@ Final customization and implementation by the developer.
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
-
   <div class="glow-blob blob1"></div>
   <div class="glow-blob blob2"></div>
 
-  <!-- NAV -->
+  <!-- ── BRAND LOGO SVG (reusable inline) ── -->
+  <svg style="display:none">
+    <symbol id="brand-diamond" viewBox="0 0 200 200">
+      <polygon points="100,5 195,100 100,195 5,100" fill="#14001F"/>
+      <polygon points="100,25 120,75 100,90 80,75" fill="#FFFFFF"/>
+      <polygon points="100,175 120,125 100,110 80,125" fill="#FFFFFF"/>
+      <polygon points="25,100 75,120 90,100 75,80" fill="#FFFFFF"/>
+      <polygon points="175,100 125,120 110,100 125,80" fill="#FFFFFF"/>
+      <rect x="86" y="86" width="28" height="28" fill="#FFFFFF" transform="rotate(45 100 100)"/>
+      <rect x="93" y="93" width="14" height="14" fill="#14001F" transform="rotate(45 100 100)"/>
+    </symbol>
+  </svg>
+
+  <!-- ── NAV ── -->
   <nav>
-    <div class="nav-logo">MS_</div>
+    <div class="nav-logo">
+      <svg width="32" height="32" viewBox="0 0 200 200">
+        <defs>
+          <filter id="navGlow">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <polygon points="100,5 195,100 100,195 5,100" fill="#14001F"/>
+        <g fill="#9B4FD4" filter="url(#navGlow)" opacity="0.5">
+          <polygon points="100,25 120,75 100,90 80,75"/>
+          <polygon points="100,175 120,125 100,110 80,125"/>
+          <polygon points="25,100 75,120 90,100 75,80"/>
+          <polygon points="175,100 125,120 110,100 125,80"/>
+          <rect x="86" y="86" width="28" height="28" transform="rotate(45 100 100)"/>
+        </g>
+        <polygon points="100,25 120,75 100,90 80,75" fill="#FFFFFF"/>
+        <polygon points="100,175 120,125 100,110 80,125" fill="#FFFFFF"/>
+        <polygon points="25,100 75,120 90,100 75,80" fill="#FFFFFF"/>
+        <polygon points="175,100 125,120 110,100 125,80" fill="#FFFFFF"/>
+        <rect x="86" y="86" width="28" height="28" fill="#FFFFFF" transform="rotate(45 100 100)"/>
+        <rect x="93" y="93" width="14" height="14" fill="#14001F" transform="rotate(45 100 100)"/>
+      </svg>
+      MOHAMAD SAMAN
+    </div>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </div>
+    <a href="#contact" class="nav-cta">Hire Me ↗</a>
   </nav>
 
-  <!-- HERO -->
+  <!-- ── HERO ── -->
   <section class="hero">
     <div class="hero-inner">
       <div class="status-badge">
@@ -497,13 +551,87 @@ Final customization and implementation by the developer.
         </a>
       </div>
     </div>
+
+    <!-- Big brand mark background -->
+    <div class="hero-brand-mark">
+      <svg width="320" height="320" viewBox="0 0 200 200">
+        <defs>
+          <filter id="heroGlow">
+            <feGaussianBlur stdDeviation="8" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <polygon points="100,5 195,100 100,195 5,100" fill="#14001F"/>
+        <g fill="#9B4FD4" filter="url(#heroGlow)" opacity="0.6">
+          <polygon points="100,25 120,75 100,90 80,75"/>
+          <polygon points="100,175 120,125 100,110 80,125"/>
+          <polygon points="25,100 75,120 90,100 75,80"/>
+          <polygon points="175,100 125,120 110,100 125,80"/>
+          <rect x="86" y="86" width="28" height="28" transform="rotate(45 100 100)"/>
+        </g>
+        <polygon points="100,25 120,75 100,90 80,75" fill="#FFFFFF"/>
+        <polygon points="100,175 120,125 100,110 80,125" fill="#FFFFFF"/>
+        <polygon points="25,100 75,120 90,100 75,80" fill="#FFFFFF"/>
+        <polygon points="175,100 125,120 110,100 125,80" fill="#FFFFFF"/>
+        <rect x="86" y="86" width="28" height="28" fill="#FFFFFF" transform="rotate(45 100 100)"/>
+        <rect x="93" y="93" width="14" height="14" fill="#14001F" transform="rotate(45 100 100)"/>
+      </svg>
+    </div>
+
     <div class="hero-scroll">
       <div class="scroll-line"></div>
       Scroll down
     </div>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ── BRAND STRIP ── -->
+  <div class="brand-section">
+    <section style="padding: 32px 60px;">
+      <div class="brand-row">
+        <div class="brand-chip">
+          <svg width="28" height="28" viewBox="0 0 200 200">
+            <polygon points="100,5 195,100 100,195 5,100" fill="#14001F"/>
+            <polygon points="100,25 120,75 100,90 80,75" fill="#FFFFFF"/>
+            <polygon points="100,175 120,125 100,110 80,125" fill="#FFFFFF"/>
+            <polygon points="25,100 75,120 90,100 75,80" fill="#FFFFFF"/>
+            <polygon points="175,100 125,120 110,100 125,80" fill="#FFFFFF"/>
+            <rect x="86" y="86" width="28" height="28" fill="#FFFFFF" transform="rotate(45 100 100)"/>
+            <rect x="93" y="93" width="14" height="14" fill="#14001F" transform="rotate(45 100 100)"/>
+          </svg>
+          <div>
+            <div class="brand-chip-label">Brand</div>
+            <div class="brand-chip-name">MS Diamond</div>
+          </div>
+        </div>
+        <div class="brand-divider"></div>
+        <div class="brand-chip">
+          <div style="width:28px;height:28px;border-radius:4px;background:#14001F;"></div>
+          <div>
+            <div class="brand-chip-label">Primary</div>
+            <div class="brand-chip-name">#14001F</div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <div style="width:28px;height:28px;border-radius:4px;background:#9B4FD4;"></div>
+          <div>
+            <div class="brand-chip-label">Accent</div>
+            <div class="brand-chip-name">#9B4FD4</div>
+          </div>
+        </div>
+        <div class="brand-chip">
+          <div style="width:28px;height:28px;border-radius:4px;background:#FFFFFF;border:0.5px solid rgba(255,255,255,0.2)"></div>
+          <div>
+            <div class="brand-chip-label">Light</div>
+            <div class="brand-chip-name">#FFFFFF</div>
+          </div>
+        </div>
+        <div class="brand-divider"></div>
+        <div style="font-size:11px;color:var(--muted);letter-spacing:0.1em;">Web Developer · Kurdistan</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── ABOUT ── -->
   <section id="about">
     <div class="section-label">About Me</div>
     <div class="section-title">Who I Am</div>
@@ -523,7 +651,29 @@ Final customization and implementation by the developer.
         </p>
       </div>
       <div class="about-card">
-        <div class="about-avatar">MS</div>
+        <div class="about-avatar">
+          <svg width="72" height="72" viewBox="0 0 200 200">
+            <defs>
+              <filter id="cardGlow">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <polygon points="100,5 195,100 100,195 5,100" fill="#14001F"/>
+            <g fill="#9B4FD4" filter="url(#cardGlow)" opacity="0.5">
+              <polygon points="100,25 120,75 100,90 80,75"/>
+              <polygon points="100,175 120,125 100,110 80,125"/>
+              <polygon points="25,100 75,120 90,100 75,80"/>
+              <polygon points="175,100 125,120 110,100 125,80"/>
+            </g>
+            <polygon points="100,25 120,75 100,90 80,75" fill="#FFFFFF"/>
+            <polygon points="100,175 120,125 100,110 80,125" fill="#FFFFFF"/>
+            <polygon points="25,100 75,120 90,100 75,80" fill="#FFFFFF"/>
+            <polygon points="175,100 125,120 110,100 125,80" fill="#FFFFFF"/>
+            <rect x="86" y="86" width="28" height="28" fill="#FFFFFF" transform="rotate(45 100 100)"/>
+            <rect x="93" y="93" width="14" height="14" fill="#14001F" transform="rotate(45 100 100)"/>
+          </svg>
+        </div>
         <h3>Mohamad Saman</h3>
         <div class="role">Developer & Tech Expert</div>
         <div class="about-stats">
@@ -550,7 +700,7 @@ Final customization and implementation by the developer.
 
   <div class="divider"></div>
 
-  <!-- SKILLS -->
+  <!-- ── SKILLS ── -->
   <section id="skills">
     <div class="section-label">Expertise</div>
     <div class="section-title">What I Do</div>
@@ -600,7 +750,7 @@ Final customization and implementation by the developer.
 
   <div class="divider"></div>
 
-  <!-- EXPERIENCE -->
+  <!-- ── EXPERIENCE ── -->
   <section id="experience">
     <div class="section-label">Resume</div>
     <div class="section-title">Experience</div>
@@ -610,10 +760,7 @@ Final customization and implementation by the developer.
         <div class="exp-content">
           <h3>Web Developer</h3>
           <div class="exp-role">Frontend Development</div>
-          <p>
-            Designing and building websites using HTML, CSS, and JavaScript.
-            Focused on clean code, responsive design, and great user experiences.
-          </p>
+          <p>Designing and building websites using HTML, CSS, and JavaScript. Focused on clean code, responsive design, and great user experiences.</p>
         </div>
       </div>
       <div class="exp-item">
@@ -621,10 +768,7 @@ Final customization and implementation by the developer.
         <div class="exp-content">
           <h3>Mobile Phone Repair Technician</h3>
           <div class="exp-role">Hardware & Diagnostics</div>
-          <p>
-            Repairing and servicing smartphones with precision — handling everything
-            from screen replacements to complex board-level troubleshooting.
-          </p>
+          <p>Repairing and servicing smartphones with precision — handling everything from screen replacements to complex board-level troubleshooting.</p>
         </div>
       </div>
       <div class="exp-item">
@@ -632,10 +776,7 @@ Final customization and implementation by the developer.
         <div class="exp-content">
           <h3>Computer & Digital Tech</h3>
           <div class="exp-role">Tech Support & Solutions</div>
-          <p>
-            Assisting individuals and businesses with computer issues, digital tools,
-            and technology needs — from software troubleshooting to full setups.
-          </p>
+          <p>Assisting individuals and businesses with computer issues, digital tools, and technology needs — from software troubleshooting to full setups.</p>
         </div>
       </div>
     </div>
@@ -643,7 +784,7 @@ Final customization and implementation by the developer.
 
   <div class="divider"></div>
 
-  <!-- CONTACT -->
+  <!-- ── CONTACT ── -->
   <section id="contact">
     <div class="section-label">Contact</div>
     <div class="section-title">Let's Talk</div>
@@ -654,22 +795,32 @@ Final customization and implementation by the developer.
       </p>
       <a href="mailto:mohammadsaman728@gmail.com" class="contact-email">
         <span class="email-icon">✉</span>
-          Email Me
+        Email Me
       </a>
-          <a href="https://mohammadsaman.github.io/00/" class="contact-email" target="_blank">
-               <span class="email-icon">🔗</span>
-            My Social Media
-          </a>
-
+      <a href="https://mohammadsaman.github.io/00/" class="contact-email" target="_blank">
+        <span class="email-icon">🔗</span>
+        My Social Media
+      </a>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ── FOOTER ── -->
   <footer>
-    <div class="footer-left">
-      © 2025 <span>Mohamad Saman</span> — All rights reserved.
+    <div class="footer-logo">
+      <svg width="24" height="24" viewBox="0 0 200 200">
+        <polygon points="100,5 195,100 100,195 5,100" fill="#14001F"/>
+        <polygon points="100,25 120,75 100,90 80,75" fill="#FFFFFF"/>
+        <polygon points="100,175 120,125 100,110 80,125" fill="#FFFFFF"/>
+        <polygon points="25,100 75,120 90,100 75,80" fill="#FFFFFF"/>
+        <polygon points="175,100 125,120 110,100 125,80" fill="#FFFFFF"/>
+        <rect x="86" y="86" width="28" height="28" fill="#FFFFFF" transform="rotate(45 100 100)"/>
+        <rect x="93" y="93" width="14" height="14" fill="#14001F" transform="rotate(45 100 100)"/>
+      </svg>
+      <div class="footer-left">
+        © 2025 <span>Mohamad Saman</span> — All rights reserved.
+      </div>
     </div>
-    <div class="footer-right">Made with precision</div>
+    <div class="footer-right">Made with 💜 in Kurdistan</div>
   </footer>
 
   <script>
@@ -697,16 +848,16 @@ Final customization and implementation by the developer.
       el.addEventListener('mouseenter', () => {
         cursor.style.transform = 'translate(-50%,-50%) scale(2)';
         ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
-        ring.style.borderColor = 'rgba(0,229,160,0.7)';
+        ring.style.borderColor = 'rgba(192,132,252,0.7)';
       });
       el.addEventListener('mouseleave', () => {
         cursor.style.transform = 'translate(-50%,-50%) scale(1)';
         ring.style.transform = 'translate(-50%,-50%) scale(1)';
-        ring.style.borderColor = 'rgba(0,229,160,0.4)';
+        ring.style.borderColor = 'rgba(192,132,252,0.4)';
       });
     });
 
-    // Intersection Observer for section animations
+    // Intersection Observer
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -716,17 +867,25 @@ Final customization and implementation by the developer.
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.skill-card, .exp-item, .about-card').forEach(el => {
+    document.querySelectorAll('.skill-card, .exp-item, .about-card, .brand-chip').forEach(el => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(24px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       observer.observe(el);
     });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'var(--accent)' : '';
+      });
+    });
   </script>
 </body>
-
 </html>
-
-
-
-
