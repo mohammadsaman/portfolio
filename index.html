@@ -1063,80 +1063,85 @@ Brand: Diamond Logo System — Dark Purple + White
     /* ══════════════════════════════════════
        CERTIFICATES — data, render, lightbox
        ══════════════════════════════════════ */
+    // NOTE: these must exactly match the filenames in your GitHub repo
+    // (root folder, no subfolders). If you rename a file on GitHub,
+    // update the matching "thumb" / "file" value below to match exactly.
     const certificates = [
       {
         title: "Claude Code in Action",
         issuer: "Anthropic",
         date: "Apr 2026",
-        thumb: "certificates/thumbs/cert-1.jpg",
-        file: "certificates/cert-1.pdf"
+        thumb: "Claude Code in Action — Anthropic.jpg",
+        file: "Claude Code in Action — Anthropic.pdf"
       },
       {
         title: "AI Fluency: Framework & Foundations",
         issuer: "Anthropic",
         date: "",
-        thumb: "certificates/thumbs/cert-2.jpg",
-        file: "certificates/cert-2.pdf"
+        thumb: "AI Fluency Framework & Foundations — Anthropic.jpg",
+        file: "AI Fluency Framework & Foundations — Anthropic.pdf"
       },
       {
         title: "Claude Code 101",
         issuer: "Anthropic",
         date: "May 2026",
-        thumb: "certificates/thumbs/cert-3.jpg",
-        file: "certificates/cert-3.pdf"
+        thumb: "Claude Code 101 — Anthropic.jpg",
+        file: "Claude Code 101 — Anthropic.pdf"
       },
       {
         title: "AI Fluency: AI Capabilities & Limitations",
         issuer: "Anthropic",
         date: "",
-        thumb: "certificates/thumbs/cert-4.jpg",
-        file: "certificates/cert-4.pdf"
+        thumb: "AI Fluency AI Capabilities & Limitations — Anthropic.jpg",
+        file: "AI Fluency AI Capabilities & Limitations — Anthropic.pdf"
       },
       {
         title: "Claude 101",
         issuer: "Anthropic",
         date: "",
-        thumb: "certificates/thumbs/cert-5.jpg",
-        file: "certificates/cert-5.pdf"
+        thumb: "Claude 101 — Anthropic.jpg",
+        file: "Claude 101 — Anthropic.pdf"
       },
       {
         title: "Introduction to Claude Cowork",
         issuer: "Anthropic",
         date: "",
-        thumb: "certificates/thumbs/cert-6.jpg",
-        file: "certificates/cert-6.pdf"
+        thumb: "Introduction to Claude Cowork — Anthropic.jpg",
+        file: "Introduction to Claude Cowork — Anthropic.pdf"
       },
       {
         title: "Gemini Certified Educator",
         issuer: "Google for Education",
         date: "Nov 2025",
-        thumb: "certificates/thumbs/cert-7.jpg",
-        file: "certificates/cert-7.pdf"
+        thumb: "Gemini Certified Educator — Google for Education.jpg",
+        file: "Gemini Certified Educator — Google for Education.pdf"
       },
       {
         title: "Gemini Certified Student — University",
         issuer: "Google for Education",
         date: "Nov 2025",
-        thumb: "certificates/thumbs/cert-8.jpg",
-        file: "certificates/cert-8.pdf"
+        thumb: "Gemini Certified Student (University) — Google for Education.jpg",
+        file: "Gemini Certified Student (University) — Google for Education.pdf"
       },
       {
         title: "Claude with the Anthropic API",
         issuer: "Anthropic",
         date: "",
-        thumb: "certificates/thumbs/cert-9.jpg",
-        file: "certificates/cert-9.pdf"
+        thumb: "Claude with the Anthropic API — Anthropic.jpg",
+        file: "Claude with the Anthropic API — Anthropic.pdf"
       }
     ];
 
     const certGrid = document.getElementById('certGrid');
 
     certificates.forEach((cert, i) => {
+      const thumbUrl = encodeURI(cert.thumb);
+      const fileUrl = encodeURI(cert.file);
       const card = document.createElement('div');
       card.className = 'cert-card';
       card.innerHTML = `
         <div class="cert-thumb">
-          <img src="${cert.thumb}" alt="${cert.title}" loading="lazy">
+          <img src="${thumbUrl}" alt="${cert.title}" loading="lazy">
           <div class="cert-view">↗</div>
           <div class="cert-badge">${cert.issuer}</div>
         </div>
@@ -1167,12 +1172,13 @@ Brand: Diamond Logo System — Dark Purple + White
     const certModalClose = document.getElementById('certModalClose');
 
     function openCertModal(cert) {
+      const fileUrl = encodeURI(cert.file);
       certModalTitle.textContent = cert.title;
       certModalSub.textContent = cert.issuer + (cert.date ? ' · ' + cert.date : '');
-      certModalFrame.src = cert.file;
-      certModalDownload.href = cert.file;
+      certModalFrame.src = fileUrl;
+      certModalDownload.href = fileUrl;
       certModalDownload.setAttribute('download', cert.title.replace(/\s+/g, '_') + '.pdf');
-      certModalOpen.href = cert.file;
+      certModalOpen.href = fileUrl;
       certModalOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
