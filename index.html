@@ -369,6 +369,145 @@ Brand: Diamond Logo System — Dark Purple + White
     }
     .exp-content p { font-size: 14px; color: var(--muted); line-height: 1.8; }
 
+    /* ── CERTIFICATES ── */
+    .cert-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px; max-width: 1200px;
+    }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: none;
+      position: relative;
+      transition: all 0.35s ease;
+    }
+    .cert-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(192,132,252,0.4);
+      box-shadow: 0 24px 48px rgba(123,47,190,0.22);
+    }
+    .cert-thumb {
+      position: relative; width: 100%; aspect-ratio: 4 / 3;
+      overflow: hidden; background: var(--surface2);
+    }
+    .cert-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: saturate(0.9);
+    }
+    .cert-card:hover .cert-thumb img {
+      transform: scale(1.06);
+      filter: saturate(1.05);
+    }
+    .cert-thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(8,0,15,0) 40%, rgba(8,0,15,0.92) 100%);
+    }
+    .cert-view {
+      position: absolute; top: 14px; right: 14px;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(8,0,15,0.6);
+      border: 1px solid rgba(192,132,252,0.35);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 15px;
+      backdrop-filter: blur(6px);
+      opacity: 0; transform: translateY(-6px) scale(0.9);
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+    .cert-card:hover .cert-view {
+      opacity: 1; transform: translateY(0) scale(1);
+    }
+    .cert-badge {
+      position: absolute; bottom: 14px; left: 14px; z-index: 2;
+      font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 11px; border-radius: 100px;
+      background: rgba(155,79,212,0.16);
+      border: 1px solid rgba(192,132,252,0.35);
+      color: var(--accent);
+    }
+    .cert-body { padding: 22px 22px 24px; }
+    .cert-body h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px; font-weight: 700;
+      line-height: 1.35; margin-bottom: 8px;
+    }
+    .cert-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; color: var(--muted); letter-spacing: 0.5px;
+    }
+    .cert-meta .cert-date { color: var(--muted); }
+    .cert-meta .cert-link {
+      color: var(--accent); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    }
+
+    /* ── CERTIFICATE MODAL / LIGHTBOX ── */
+    .cert-modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(4,0,8,0.88);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .cert-modal-overlay.active { opacity: 1; pointer-events: all; }
+    .cert-modal {
+      width: 100%; max-width: 880px; max-height: 90vh;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    }
+    .cert-modal-overlay.active .cert-modal { transform: translateY(0) scale(1); }
+    .cert-modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 26px;
+      border-bottom: 1px solid var(--border2);
+      flex-shrink: 0;
+      gap: 16px;
+    }
+    .cert-modal-title-wrap { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+    .cert-modal-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px; font-weight: 700;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .cert-modal-sub {
+      font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase;
+    }
+    .cert-modal-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .cert-modal-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--text); text-decoration: none;
+      border: 1px solid var(--border2); border-radius: 100px;
+      padding: 8px 16px; cursor: none;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .cert-modal-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .cert-modal-close {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid var(--border2); background: transparent;
+      color: var(--text); font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: none; transition: all 0.25s ease; flex-shrink: 0;
+    }
+    .cert-modal-close:hover { border-color: var(--accent); color: var(--accent); transform: rotate(90deg); }
+    .cert-modal-body { flex: 1; overflow: hidden; background: #1a1024; }
+    .cert-modal-body iframe { width: 100%; height: 100%; min-height: 60vh; border: none; }
+
     /* ── CONTACT ── */
     .contact-wrapper {
       max-width: 700px;
@@ -467,6 +606,9 @@ Brand: Diamond Logo System — Dark Purple + White
       .exp-item { grid-template-columns: 1fr; gap: 8px; }
       .contact-wrapper { padding: 28px 20px; }
       footer { flex-direction: column; gap: 12px; text-align: center; }
+      .cert-modal { max-height: 94vh; }
+      .cert-modal-body iframe { min-height: 50vh; }
+      .cert-modal-title { max-width: 160px; }
     }
   </style>
 </head>
@@ -521,6 +663,7 @@ Brand: Diamond Logo System — Dark Purple + White
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
+      <a href="#certificates">Certificates</a>
       <a href="#contact">Contact</a>
     </div>
     <a href="#contact" class="nav-cta">Hire Me ↗</a>
@@ -784,6 +927,15 @@ Brand: Diamond Logo System — Dark Purple + White
 
   <div class="divider"></div>
 
+  <!-- ── CERTIFICATES ── -->
+  <section id="certificates">
+    <div class="section-label">Credentials</div>
+    <div class="section-title">Certificates</div>
+    <div class="cert-grid" id="certGrid"></div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- ── CONTACT ── -->
   <section id="contact">
     <div class="section-label">Contact</div>
@@ -803,6 +955,26 @@ Brand: Diamond Logo System — Dark Purple + White
       </a>
     </div>
   </section>
+
+  <!-- ── CERTIFICATE MODAL ── -->
+  <div class="cert-modal-overlay" id="certModalOverlay">
+    <div class="cert-modal">
+      <div class="cert-modal-header">
+        <div class="cert-modal-title-wrap">
+          <div class="cert-modal-title" id="certModalTitle">Certificate</div>
+          <div class="cert-modal-sub" id="certModalSub">Issuer</div>
+        </div>
+        <div class="cert-modal-actions">
+          <a class="cert-modal-btn" id="certModalDownload" download>Download</a>
+          <a class="cert-modal-btn" id="certModalOpen" target="_blank" rel="noopener">Open ↗</a>
+          <button class="cert-modal-close" id="certModalClose">✕</button>
+        </div>
+      </div>
+      <div class="cert-modal-body">
+        <iframe id="certModalFrame" src="" title="Certificate viewer"></iframe>
+      </div>
+    </div>
+  </div>
 
   <!-- ── FOOTER ── -->
   <footer>
@@ -844,7 +1016,7 @@ Brand: Diamond Logo System — Dark Purple + White
     }
     animateRing();
 
-    document.querySelectorAll('a, button, .skill-card').forEach(el => {
+    function bindCursorHover(el) {
       el.addEventListener('mouseenter', () => {
         cursor.style.transform = 'translate(-50%,-50%) scale(2)';
         ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
@@ -855,7 +1027,8 @@ Brand: Diamond Logo System — Dark Purple + White
         ring.style.transform = 'translate(-50%,-50%) scale(1)';
         ring.style.borderColor = 'rgba(192,132,252,0.4)';
       });
-    });
+    }
+    document.querySelectorAll('a, button, .skill-card').forEach(bindCursorHover);
 
     // Intersection Observer
     const observer = new IntersectionObserver((entries) => {
@@ -886,6 +1059,139 @@ Brand: Diamond Logo System — Dark Purple + White
           ? 'var(--accent)' : '';
       });
     });
+
+    /* ══════════════════════════════════════
+       CERTIFICATES — data, render, lightbox
+       ══════════════════════════════════════ */
+    const certificates = [
+      {
+        title: "Claude Code in Action",
+        issuer: "Anthropic",
+        date: "Apr 2026",
+        thumb: "certificates/thumbs/cert-1.jpg",
+        file: "certificates/cert-1.pdf"
+      },
+      {
+        title: "AI Fluency: Framework & Foundations",
+        issuer: "Anthropic",
+        date: "",
+        thumb: "certificates/thumbs/cert-2.jpg",
+        file: "certificates/cert-2.pdf"
+      },
+      {
+        title: "Claude Code 101",
+        issuer: "Anthropic",
+        date: "May 2026",
+        thumb: "certificates/thumbs/cert-3.jpg",
+        file: "certificates/cert-3.pdf"
+      },
+      {
+        title: "AI Fluency: AI Capabilities & Limitations",
+        issuer: "Anthropic",
+        date: "",
+        thumb: "certificates/thumbs/cert-4.jpg",
+        file: "certificates/cert-4.pdf"
+      },
+      {
+        title: "Claude 101",
+        issuer: "Anthropic",
+        date: "",
+        thumb: "certificates/thumbs/cert-5.jpg",
+        file: "certificates/cert-5.pdf"
+      },
+      {
+        title: "Introduction to Claude Cowork",
+        issuer: "Anthropic",
+        date: "",
+        thumb: "certificates/thumbs/cert-6.jpg",
+        file: "certificates/cert-6.pdf"
+      },
+      {
+        title: "Gemini Certified Educator",
+        issuer: "Google for Education",
+        date: "Nov 2025",
+        thumb: "certificates/thumbs/cert-7.jpg",
+        file: "certificates/cert-7.pdf"
+      },
+      {
+        title: "Gemini Certified Student — University",
+        issuer: "Google for Education",
+        date: "Nov 2025",
+        thumb: "certificates/thumbs/cert-8.jpg",
+        file: "certificates/cert-8.pdf"
+      },
+      {
+        title: "Claude with the Anthropic API",
+        issuer: "Anthropic",
+        date: "",
+        thumb: "certificates/thumbs/cert-9.jpg",
+        file: "certificates/cert-9.pdf"
+      }
+    ];
+
+    const certGrid = document.getElementById('certGrid');
+
+    certificates.forEach((cert, i) => {
+      const card = document.createElement('div');
+      card.className = 'cert-card';
+      card.innerHTML = `
+        <div class="cert-thumb">
+          <img src="${cert.thumb}" alt="${cert.title}" loading="lazy">
+          <div class="cert-view">↗</div>
+          <div class="cert-badge">${cert.issuer}</div>
+        </div>
+        <div class="cert-body">
+          <h3>${cert.title}</h3>
+          <div class="cert-meta">
+            <span class="cert-date">${cert.date || 'Certificate'}</span>
+            <span class="cert-link">View PDF</span>
+          </div>
+        </div>
+      `;
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(24px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      card.style.transitionDelay = (i * 0.05) + 's';
+      observer.observe(card);
+      bindCursorHover(card);
+      card.addEventListener('click', () => openCertModal(cert));
+      certGrid.appendChild(card);
+    });
+
+    const certModalOverlay = document.getElementById('certModalOverlay');
+    const certModalTitle = document.getElementById('certModalTitle');
+    const certModalSub = document.getElementById('certModalSub');
+    const certModalFrame = document.getElementById('certModalFrame');
+    const certModalDownload = document.getElementById('certModalDownload');
+    const certModalOpen = document.getElementById('certModalOpen');
+    const certModalClose = document.getElementById('certModalClose');
+
+    function openCertModal(cert) {
+      certModalTitle.textContent = cert.title;
+      certModalSub.textContent = cert.issuer + (cert.date ? ' · ' + cert.date : '');
+      certModalFrame.src = cert.file;
+      certModalDownload.href = cert.file;
+      certModalDownload.setAttribute('download', cert.title.replace(/\s+/g, '_') + '.pdf');
+      certModalOpen.href = cert.file;
+      certModalOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCertModal() {
+      certModalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => { certModalFrame.src = ''; }, 300);
+    }
+
+    certModalClose.addEventListener('click', closeCertModal);
+    bindCursorHover(certModalClose);
+    certModalOverlay.addEventListener('click', (e) => {
+      if (e.target === certModalOverlay) closeCertModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && certModalOverlay.classList.contains('active')) closeCertModal();
+    });
+    [certModalDownload, certModalOpen].forEach(bindCursorHover);
   </script>
 </body>
 </html>
